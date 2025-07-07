@@ -10,7 +10,7 @@ headers = {
 
 # 获取物品列表的JSON数据并解析为
 target = 'https://pvp.qq.com/web201605/js/item.json'
-item_df = pd.DataFrame(requests.get(target, DataFrameheaders=headers).json())
+item_df = pd.DataFrame(requests.get(target, headers=headers).json())
 
 # 数据预处理
 item_df.sort_values(["item_type", "price", "item_id"], inplace=True)
@@ -28,7 +28,7 @@ def download_img(item_id):
             f.write(res.content)
 
 # 创建保存图片的目录
-os.makedirs("imgs", exist_ok=True)
+os.makedirs("itemimg", exist_ok=True)
 
 # 使用线程池并发下载图片
 with ThreadPoolExecutor(max_workers=8) as executor:
